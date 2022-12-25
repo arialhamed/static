@@ -4,7 +4,7 @@ read skeleton
 sudo apt update
 wget https://dl.discordapp.net/apps/linux/0.0.21/discord-0.0.21.deb
 sudo apt upgrade -y
-sudo apt install wine lm-sensors ffmpeg git gh asciinema adb apksigner qbittorrent hwinfo powertop powerstat fancontrol traceroute tint quadrapassel gnome-disk-utility gdebi gedit steam vlc obs-studio krita inkscape telegram-desktop kamoso kdenlive imagemagick baobab tlp tlp-rdw apktool plasma-workspace-wayland cmake qt5-qmake flatpak audacity hw-probe blender virtualbox freecad libnotify-bin python3-pip default-jre default-jdk software-properties-common gimp meshlab nmap net-tools bible-kjv docker.io acpi pv neofetch zpaq torbrowser-launcher -y
+sudo apt install wine lm-sensors ffmpeg git gh asciinema adb apksigner qbittorrent hwinfo powertop powerstat fancontrol traceroute tint quadrapassel gnome-disk-utility gdebi gedit steam vlc obs-studio krita inkscape telegram-desktop kamoso kdenlive imagemagick baobab tlp tlp-rdw apktool plasma-workspace-wayland cmake qt5-qmake flatpak audacity hw-probe blender virtualbox freecad libnotify-bin python3-pip default-jre default-jdk software-properties-common gimp meshlab nmap net-tools bible-kjv docker.io acpi pv neofetch zpaq torbrowser-launcher npm fprintd libpam-fprintd -y
 sudo apt remove ktorrent -y
 sudo dpkg -i discord*.deb
 sudo apt install --fix-broken
@@ -42,6 +42,17 @@ echo "alias {rekonsole,rek}='(sleep .1; bash ;konsole) & exit'" >> ~/.bashrc
 echo "alias poop='echo $skeleton | sudo -S'" >> ~/.bashrc
 echo "alias stfu='shutdown -P 0'" >> ~/.bashrc
 echo "alias starback='rm -rf /media/ari/Unified/Downloads/storage/ ; cp -r /media/ari/Unified/SteamLibrary/steamapps/common/Starbound/storage/ /media/ari/Unified/Downloads/'" >> ~/.bashrc
+echo "alias clear='clear; echo -e $bash_message'" >> ~/.bashrc
+echo "alias kill='f(){ kill -9 $(ps -x | grep "$@") ;  unset -f f; }; f'" >> ~/.bashrc
+echo "alias nano='nano --tabsize=4 --constantshow --softwrap --atblanks --autoindent --smarthome --cutfromcursor'" >> ~/.bashrc
+echo "alias watch='watch -n .5'" >> ~/.bashrc
+echo "alias cp='rsync -aP'" >> ~/.bashrc
+echo "alias mv='rsync -aP --remove-source-files'" >> ~/.bashrc
+echo "alias neofetch='neofetch --ascii_distro Kubuntu'" >> ~/.bashrc
+echo "alias python='python3'"
+# alias cd='cd /media/ari/Unified'
+
+
 echo "alias clear='clear; echo -e $bash_message'" >> ~/.bashrc
 echo "alias kill='f(){ kill -9 $(ps -x | grep \"$@\") ;  unset -f f; }; f'" >> ~/.bashrc
 echo "echo -e '$bash_message'" >> ~/.bashrc
