@@ -34,6 +34,7 @@ echo "alias {unified,Unified}='cd /media/ari/Unified/'" >> ~/.bashrc
 echo "alias {NYP,nyp}='cd /media/ari/Unified/NYP'" >> ~/.bashrc
 ## echo "alias update='if echo -e $skeleton | sudo -S echo 85 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold; then notify-send "Charge stop threshold is set to 85% by login script."; else notify-send "Charge stop threshold is NOT set." "Battery is not connected" --urgency=critical; fi; if echo -e $skeleton | sudo -S echo 75 | sudo tee /sys/class/power_supply/BAT0/charge_start_threshold; then notify-send "Charge start threshold is set to 75% by login script."; else notify-send "Charge start threshold is NOT set." "Battery is not connected" --urgency=critical; fi; if echo -e $skeleton | sudo -S apt update && sudo apt upgrade -y && sudo snap refresh; then notify-send "System apt & snap updated by login script."; else notify-send "System apt & snap was not auto-updated by login script." "Check script or settings again." --urgency=critical; fi'
 echo "alias backup='zpaq a /media/ari/2TB/Backups/Unified.zpaq /media/ari/Unified && zpaq a /media/ari/Morbdrive/Backups/NYP.zpaq /media/ari/Unified/NYP/ && cp /media/ari/Morbdrive/Backups/NYP.zpaq /media/ari/2TB/Backups/NYP.zpaq'" >> ~/.bashrc
+echo "alias stbu='backup; shutdown -P 0'" >> ~/.bashrc
 echo "alias {find100M,find100m}='find `pwd` -type f -size +100M'" >> ~/.bashrc
 echo "alias watch='watch -n .5'" >> ~/.bashrc
 echo "alias editbash='nano ~/.bashrc'" >> ~/.bashrc
