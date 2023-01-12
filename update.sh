@@ -12,3 +12,5 @@ else
 	find `pwd` -type f -size +100M ! -path '*/.git/*'
 	echo "there are files larger than 100M, git cannot upload files that size and larger, fix it."
 fi
+
+notify-send "git operations are done"
