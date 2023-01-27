@@ -1,0 +1,4 @@
+{ 
+    "main": "@causalNet/layer", 
+    "min": "@causalNet/layer.min"
+}

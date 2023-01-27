@@ -1,0 +1,4 @@
+{ 
+    "main": "@causalNet/models", 
+    "dir": "@causalNet/models/"
+}

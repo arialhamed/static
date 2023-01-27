@@ -1,0 +1,1 @@
+export { default as CategoryNormalizingMixins } from './categoryNormalizing.mixins'; 
