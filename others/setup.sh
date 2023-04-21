@@ -4,7 +4,7 @@ read skeleton
 sudo apt update
 wget https://dl.discordapp.net/apps/linux/0.0.21/discord-0.0.21.deb
 sudo apt upgrade -y
-sudo apt install wine lm-sensors ffmpeg git gh asciinema adb apksigner qbittorrent hwinfo powertop powerstat fancontrol traceroute tint quadrapassel gnome-disk-utility gdebi gedit steam vlc obs-studio krita inkscape telegram-desktop kamoso kdenlive imagemagick baobab tlp tlp-rdw apktool plasma-workspace-wayland cmake qt5-qmake flatpak audacity hw-probe blender virtualbox freecad libnotify-bin python3-pip default-jre default-jdk software-properties-common gimp meshlab nmap net-tools bible-kjv docker.io acpi pv neofetch zpaq torbrowser-launcher npm fprintd libpam-fprintd w3m w3m-img -y
+sudo apt install wine lm-sensors ffmpeg git gh asciinema adb apksigner qbittorrent hwinfo powertop powerstat fancontrol traceroute tint quadrapassel gnome-disk-utility gdebi gedit steam vlc obs-studio krita inkscape telegram-desktop kamoso kdenlive imagemagick baobab tlp tlp-rdw apktool plasma-workspace-wayland cmake qt5-qmake flatpak audacity hw-probe blender virtualbox freecad libnotify-bin python3-pip default-jre default-jdk software-properties-common gimp meshlab nmap net-tools bible-kjv docker.io acpi pv neofetch zpaq torbrowser-launcher npm fprintd libpam-fprintd w3m w3m-img xautomation r-base-core -y
 sudo apt remove ktorrent -y
 sudo dpkg -i discord*.deb
 sudo apt install --fix-broken
