@@ -10,7 +10,7 @@ echo(version=version());
 real_x = 95;
 real_y = 82;
 real_z = 0.6666666;
-main_res = 64; // Resolution for arcs in spheres, cylinders & circles. Higher res means more smoother models & more accurate models dimensions
+main_res = 64; // Resolution for arcs in spheres, cylinders & circles. Higher res means more smoother models & more accurate models dimensions, at the cost of machine performance (duh)
 ansi=0.18; // This value is for deburring the model (remove sharp edges), using minkowski function here in OpenSCAD, following ANSI Z359.14 standard, to a minimum of 0.127mm (0.005 inches). I think that's what it means anyway ¯\_(ツ)_/¯ i just don't want my models to hurt anyone. 
 allowance=0.001; // This value is for when I really want to make sure that shapes connect
 
