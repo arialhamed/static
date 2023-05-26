@@ -22,6 +22,7 @@ module hddLidFunctional(main_x, main_y, main_z, main_res){
     donut_outerRad = 4.15;
     donut_y = 2.75;
     donut_z = 4.5;
+    holder_x = .6;
 
     module addition(){
 
@@ -46,27 +47,46 @@ module hddLidFunctional(main_x, main_y, main_z, main_res){
             cube([8,donut_y+allowance,donut_z]);
         }
 
-        // Bottom (smaller) half of donut
+        // Bottom (smaller) half of donut 
         translate([donut_outerRad,0,donut_z]) rotate([-90,0,0]) cylinder(h=donut_y, r=donut_outerRad * (3.251/4), $fn=main_res); // Bottom semi-circle
         
-        // The holders of the donut
-        cube(size=[.6, donut_y, donut_z], center=false);
-        translate([donut_outerRad*2-.6, 0, 0]) cube(size=[.6, donut_y, donut_z], center=false);
-        
+        // The holders of the donut 
+        cube(size=[holder_x, donut_y, donut_z], center=false);
+        translate([donut_outerRad*2-holder_x, 0, 0]) cube(size=[holder_x, donut_y, donut_z], center=false);
+        translate([donut_outerRad-(0.3/2),.75,.75]) cube([0.3,2,.5]);
 
         // A filler between the the holders & the donut 
         translate([0, 0, 4.5-1]) cube(size=[8,donut_y,1], center=false);
 
-        
+        // Side tabs 
+        translate([25.3, 9, .9]) cube(size=[4.5, 1.75, .75], center=false);
+        translate([59.5, 9, .9]) cube(size=[4.5, 1.75, .75], center=false);
+
+        // Locking tab (IMPORTANT) 
+        translate([main_x-1+ansi, ansi, ansi]) 
+        union(){
+            minkowski(){ cube(size=[1-(ansi*2), 6.5-(ansi*2), 3-(ansi*2)], center=false); sphere(r=ansi, $fn=main_res); }
+            minkowski(){ translate([0, 2, 2.25]) cube(size=[3-(ansi*2), 3-(ansi*2), .75-(ansi*2)], center=false); sphere(r=ansi, $fn=main_res); }
+        }
+
+
     }
 
     difference(){
         addition();
 
+        curved_hollow_rad = 2;
+
         // The curved hollow, just perpendicular to the standoff
-        translate([0, donut_y+2+allowance, 0-2]) minkowski(){ 
-            cube(size=[6,5,4]);
-            cylinder(h=2, r=2, $fn=main_res);
+        translate([0, donut_y+curved_hollow_rad+allowance, -allowance]) minkowski(){ 
+            cube(size=[donut_outerRad*2-curved_hollow_rad-holder_x, main_y, 1+allowance*2]);
+            cylinder(h=1+allowance*2, r=curved_hollow_rad, $fn=main_res);
+        }
+
+        // The curve to the corner of the hollow
+        translate([donut_outerRad*2-holder_x, main_y-(curved_hollow_rad/2), -allowance]) difference(){
+            translate([-allowance, allowance, -allowance]) cube(size=[(curved_hollow_rad/2), (curved_hollow_rad/2), 1+allowance*2], center=false);
+            translate([curved_hollow_rad/2, 0, -allowance]) cylinder(h=1+allowance*2, r=(curved_hollow_rad/2), center=false, $fn=main_res);
         }
 
         // Main hole & space for screwhead
@@ -79,31 +99,38 @@ module hddLidFunctional(main_x, main_y, main_z, main_res){
             translate([0,-allowance+2,2]) rotate([0,90,0]) cylinder(h=main_x+allowance*2, r=2, center=false, $fn=main_res);
         }
 
-
     }
-
-    // Tabs 
-    translate([25.3,9,.9]) cube(size=[4.5,1.75,.75], center=false);
-    translate([59.5,9,.9]) cube(size=[4.5,1.75,.75], center=false);
-
-    // Middle donut holder (smallest)
-    translate([donut_outerRad-(0.3/2),.75,.75]) cube([0.3,2,.5]);
     
 }
 
 module hddLidYassified(main_x, main_y, main_z, main_res){
     hddLidFunctional(main_x, main_y, main_z, main_res);
+    floorThicknessWithAllowance_z = .9;
 
-    module innerStick(the_xArr, idx=0){
+    // There are 2 sets of 3 stick jammies underneath
+    module innerStick(the_xArr, idx=0, innerStickMink=.075){
         if (idx < len(the_xArr)) {
             minkowski(){
-                translate([ the_xArr[idx] +.075, main_y-1-8+.075, .9-.075]) cube(size=[.25-(.075*2),8-(.075*2),.25], center=false); 
-                sphere(r=.075, $fn=main_res);
+                translate([ the_xArr[idx] +innerStickMink, main_y-1-8+innerStickMink, floorThicknessWithAllowance_z-innerStickMink]) 
+                cube(size=[.25-(innerStickMink*2),8-(innerStickMink*2),.25], center=false); 
+                sphere(r=innerStickMink, $fn=main_res);
             }
             innerStick(the_xArr, idx + 1);
         }
     }
     innerStick([9.5, 11.5, 13.5, 76.5, 78.5, 80.5]);
+
+    // There are 2 structures that are kinda like scaffolding (the rectangles)
+    module scaffoldStructure(the_xArr, idx=0){
+        if (idx < len(the_xArr)) {
+            translate([the_xArr[idx][0], main_y-2-the_xArr[idx][1], floorThicknessWithAllowance_z]) cube(size=[the_xArr[idx][2], the_xArr[idx][3], .75], center=false);
+            scaffoldStructure(the_xArr, idx + 1);
+        }
+    }
+    scaffoldStructure([[25.3, 7, .25, 7, .75], [25.3, .25, 13.75, .25, .75], [25.3, 4.75, 13.75, .25, .75], [38.8, 7, .25, 7, .75], [59.25, 7, .25, 7, .75], [59.25, .25, 7.5, .25, .75], [59.25, 4.75, 7.5, .25, .75], [66.5, 7, .25, 7, .75]]);
+    
+
+
 }
 
 module hddLidFinal(main_x, main_y, main_z, main_res){
