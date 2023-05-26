@@ -41,7 +41,7 @@ module ramLid2(main_x, main_y, main_z, main_res){
         minkowski(){
             translate([pos_x, pos_y, pos_z])
             cube(size=[dim_x-val_rad*2,dim_y-val_rad*2,dim_z-val_rad*2], center=false);
-            sphere(r=val_rad, $fn=main_res);
+            sphere(r=val_rad);
         }
     } // The minkCube, short for Minkowski Cube, is basically a cuboid shape with rounded edges, with a radius that is ANSI
     module ventSlit(mod_x=0, mod_y=0){ 
@@ -50,10 +50,10 @@ module ramLid2(main_x, main_y, main_z, main_res){
         cube([6, main_z*8, .3]);
     } // These are those vent holes, almost the same as the ones below the exhaust fans. Keeping it here for the sake of originality (and also for cooling, if it is effective).
     module standoffs(mod_x, mod_y, mod_z){
-        translate([mod_x, mod_y, mod_z]) cylinder(h=main_z*2, d1=4.5, d2=6.5, $fn=main_res);
+        translate([mod_x, mod_y, mod_z]) cylinder(h=main_z*2, d1=4.5, d2=6.5);
     } // There are the cone shapes that will help in creating the actual screwholes that this lid will be held with onto the laptop body. There are only 2 of these.
     module kbScrewhole(mod_x, mod_y){
-        translate([mod_x, mod_y, -main_z]) cylinder(h=main_z*3, d=5.5, $fn=main_res);
+        translate([mod_x, mod_y, -main_z]) cylinder(h=main_z*3, d=5.5);
     } // There are also only 2 of these, and not much attention needed as there are quite simple.
     
     // Addition.
@@ -69,16 +69,16 @@ module ramLid2(main_x, main_y, main_z, main_res){
                 minkowski(){
                     translate([xy_radius,xy_radius,0])
                     cube(size=[main_x-ansi*2-xy_radius*2, main_y-ansi*2-xy_radius*2, main_z-ansi*2], center=false);
-                    cylinder(h=ansi, r=xy_radius, center=true, $fn=main_res); // only the corners by X&Y
+                    cylinder(h=ansi, r=xy_radius, center=true); // only the corners by X&Y
                 }
             //     minkowski(){
             //         translate([xy_radius+ansi,xy_radius+ansi,0])
             //         cube(size=[main_x-ansi*2-xy_radius*2-ansi*2, main_y-ansi*2-xy_radius*2-ansi*2, main_z-ansi*2 ], center=false);
-            //         cylinder(h=ansi, r=xy_radius-ansi, center=true, $fn=main_res); // only the corners by X&Y
+            //         cylinder(h=ansi, r=xy_radius-ansi, center=true); // only the corners by X&Y
             //     }
 
             // }
-            sphere(r=ansi, $fn=main_res); // all edges
+            sphere(r=ansi); // all edges
         }
         
         // Tabs that ensure that the lid does not fully depend on the screws (essential).
@@ -88,7 +88,7 @@ module ramLid2(main_x, main_y, main_z, main_res){
             translate([0, main_y, -tabz/2*3]) 
             // minkowski(){
             //     translate([ansi,ansi,0]) cube([6-ansi*2, 1.5-ansi*2, tabz]);
-            //     cylinder(h=tabz, r=-ansi, center=true, $fn=main_res);
+            //     cylinder(h=tabz, r=-ansi, center=true);
             // }; 
             cube([6, 1.5, tabz]);// Protruding tab, TODO: ansify the tabs here
             translate([0, main_y, -tabz/2*3]) rotate([78+mod_tab/2,0,0]) { cube([6, tabz * 1.1, 1.5]); }; // "Triangle" that ensures tab is connected.
@@ -108,7 +108,7 @@ module ramLid2(main_x, main_y, main_z, main_res){
         module trapezoidBump(the_x){
             translate([ansi, ansi, ansi]) minkowski(){
                 translate([the_x, main_y-3, speed_bump_z_pos]) linear_extrude(height=speed_bump_z_dim -ansi*2){ polygon(points = [[0+ansi*2, 3-ansi*2], [3+ansi*2, 0+ansi*2], [30-ansi*2, 0+ansi*2], [33-ansi*2, 3-ansi*2]]); }
-                sphere(r=ansi, $fn=main_res);
+                sphere(r=ansi);
             }
         }
         trapezoidBump(12);
@@ -127,8 +127,8 @@ module ramLid2(main_x, main_y, main_z, main_res){
         }
         standoffs(5.2, 5, -main_z / 3 * 2); // This subtracts and hollows the shape added earlier to allow space for the screw head
         standoffs(89.5, 5, -main_z / 3 * 2); // ^
-        translate([5.2, 5, -main_z*3]) cylinder(h=main_z*5, r=1.1, $fn=main_res); // Of course, ^ does not give the hole, so just add a fine cylinder to give it the hole
-        translate([89.5, 5, -main_z*3]) cylinder(h=main_z*5, r=1.1, $fn=main_res); // ^
+        translate([5.2, 5, -main_z*3]) cylinder(h=main_z*5, r=1.1); // Of course, ^ does not give the hole, so just add a fine cylinder to give it the hole
+        translate([89.5, 5, -main_z*3]) cylinder(h=main_z*5, r=1.1); // ^
         
     };
     
@@ -179,4 +179,11 @@ module ramLid3(main_x, main_y, main_z, main_res){
 // translate([real_x,0,real_z]) 
 // rotate([180,0,180]) 
 // color("#aa4466") 
+$fn = 64;
 ramLid3(real_x, real_y, real_z, arc_resolution);
+// if ($t < .5){
+//     rotate([0, -($t * 30), 0]) ramLid3(real_x, real_y, real_z, arc_resolution);
+// } else {
+//     rotate([0, ($t * 30)-30, 0]) ramLid3(real_x, real_y, real_z, arc_resolution);    
+// }
+
