@@ -15,21 +15,7 @@ ansi=0.23; // This value is for deburring the model (remove sharp edges), using 
 allowance=0.001; // This value is for when I really want to make sure that shapes connect
 
 // Signature
-module signature(sign_x, sign_y, sign_z, sign_depth, sign_size=1){
-    
-    translate([sign_x, sign_y, sign_z])
-    linear_extrude(height=sign_depth)
-    offset(r=0.01, $fn=40){ 
-        scale([(1/20)*sign_size,.05*sign_size,.05*sign_size]){
-            polygon([[0,0],[8,16],[16,0],[15,0],[8,14],[1,0]]);
-            polygon([[15,0],[4,7],[4,8],[15,1]]);
-            polygon([[4,7],[17,7],[17,7.8],[17,7],[17,7.8],[4,7.8]]);
-            polygon([[16.9,7],[8.9,14],[8,16],[20,16],[19,15.2],[9,15.2],[17,8],[18,7]]);
-            polygon([[5.8,17.8],[5,20],[4.2,17.8],[6.1,19.23],[3.9,19.23]]);
-            translate([0,(-sign_size/3.5)/5*7.5,0]) text("arial hamed", size=sign_size/3.5, font="Liberation Mono"); 
-        }
-    }
-}
+module signature(sign_x, sign_y, sign_z, sign_depth, sign_size=1){ translate([sign_x, sign_y, sign_z]) linear_extrude(height=sign_depth) offset(r=0.01, $fn=40){  scale([(1/20)*sign_size,.05*sign_size,.05*sign_size]){ polygon([[0,0],[8,16],[16,0],[15,0],[8,14],[1,0]]); polygon([[15,0],[4,7],[4,8],[15,1]]); polygon([[4,7],[17,7],[17,7.8],[17,7],[17,7.8],[4,7.8]]); polygon([[16.9,7],[8.9,14],[8,16],[20,16],[19,15.2],[9,15.2],[17,8],[18,7]]); polygon([[5.8,17.8],[5,20],[4.2,17.8],[6.1,19.23],[3.9,19.23]]); translate([0,(-sign_size/3.5)/5*7.5,0]) text("arial hamed", size=sign_size/3.5, font="Liberation Mono");  } } }
 
 // Base model.
 module ramLid2(main_x, main_y, main_z, main_res){
