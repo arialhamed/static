@@ -56,8 +56,8 @@ module tomoWork() {
 				translate([0,10.5]) polygon([[54.50, 41.25], [55.25, 43.00], [55.00, 45.00], [55.50, 46.50], [56.75, 46.25], [57.00, 44.50], [56.25, 43.00], [56.00, 42.00], [57.75, 42.50], [58.75, 44.75], [58.25, 46.50], [57.50, 46.75], [57.25, 45.75], [56.75, 46.75], [57.25, 47.50], [59.00, 47.75], [59.00, 48.75], [57.25, 50.25], [55.75, 50.25], [54.25, 49.50], [54.00, 47.75], [55.00, 47.50], [55.75, 47.00], [55.25, 46.50], [54.75, 47.75], [53.50, 46.75], [53.00, 45.25], [53.25, 43.25]]);
 			}
 		}
-		translate([0,-2.8]) scale(.065) import("micron.svg");
-		translate([9,-8]) text("ari hamed", size=1.5);
+		translate([0,-3.8]) scale(.064) import("micron.svg");
+		translate([8.5,-11]) text("ari hamed", size=1.8);
 	}
 }	
 
@@ -72,8 +72,7 @@ module signatureAri(sign_x, sign_y, sign_z, sign_depth, sign_size=1){
 			polygon([[4,7],[17,7],[17,7.8],[17,7],[17,7.8],[4,7.8]]); 
 			polygon([[16.9,7],[8.9,14],[8,16],[20,16],[19,15.2],[9,15.2],[17,8],[18,7]]); 
 			polygon([[5.8,17.8],[5,20],[4.2,17.8],[6.1,19.23],[3.9,19.23]]); 
-			translate([-.5,(-sign_size/3.5)/5*4,0]) 
-			text("arial hamed", size=sign_size/8, font="Liberation Mono");  
+			// translate([-.5,(-sign_size/3.5)/5*4,0]) text("arial hamed", size=sign_size/8, font="Liberation Mono");  
 		} 
 	} 
 }
@@ -168,13 +167,13 @@ module neutronTrinketFunctional(main_x, main_y, main_z){
 
 module neutronTrinketDetailed(main_x, main_y, main_z){
 	difference(){
-		// neutronTrinketFunctional(main_x, main_y, main_z);
-		// translate([9.9,-1,main_z*.5-1]) signatureAri(-16, -4, 0, 1, 15);
+		neutronTrinketFunctional(main_x, main_y, main_z);
+		translate([9.2,-3,main_z*.5-1]) signatureAri(-16, -4, 0, 1, 16);
 		// translate([-11, 13, main_z*.5]) rotate([180,0,0]) scale([.22,.22]) linear_extrude(1) signatureWeiLing();
 		// translate([-11, 11.5, main_z*.5]) rotate([180,0,0]) scale([.22,.22]) linear_extrude(1) signatureDesiree();
 		// translate([-11, 11.5, main_z*.5]) rotate([180,0,0]) scale([.22,.22]) linear_extrude(1) signatureEthan();
 
-		// translate([8.9,-1,-main_z*.5+1]) rotate([0,180,0]) linear_extrude(1) 
+		translate([10.5,1.5,-main_z*.5+1]) rotate([0,180,0]) scale([.9,.9,1]) linear_extrude(1) 
 		tomoWork();
 	}
 }
@@ -185,5 +184,5 @@ module neutronTrinketFinal(main_x, main_y, main_z){
 
 allowance = 0.001;
 ansi = 0.5;
-$fn = 8*1;
+$fn = 8*3;
 neutronTrinketFinal(80,80,10);
