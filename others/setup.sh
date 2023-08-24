@@ -11,11 +11,14 @@ sudo apt install --no-install-recommends wine lm-sensors ffmpeg git gh asciinema
 echo -e "\nRemoving KTorrent (replaced with QBitTorrent"
 sudo apt remove ktorrent -y
 
+echo -e "\nInstalling AIMP"
+wget `curl -Ls -o /dev/null -w %{url_effective} "https://www.aimp.ru/?do=download.file&id=26"` && sudo dpkg -i *.deb
+
 echo -e "\nInstalling Discord"
-wget `curl -Ls -o /dev/null -w %{url_effective} "https://discord.com/api/download?platform=linux&format=deb"` && sudo dpkg -i discord*.deb && sudo apt install --fix-broken -y && sudo dpkg -i discord*.deb && rm discord*.deb
+wget `curl -Ls -o /dev/null -w %{url_effective} "https://discord.com/api/download?platform=linux&format=deb"` && sudo dpkg -i discord*.deb && sudo apt install --fix-broken -y && sudo dpkg -i discord*.deb
 
 echo -e "\nInstalling Minecraft"
-wget https://launcher.mojang.com/download/Minecraft.deb && sudo dpkg -i Minecraft.deb && rm Minecraft.deb
+wget https://launcher.mojang.com/download/Minecraft.deb && sudo dpkg -i Minecraft.deb && rm *.deb
 
 echo -e "\nInstalling pdftk, zoom, openjdk, visual studio code, & android studio"
 sudo snap install pdftk zoom-client openjdk
