@@ -1,4 +1,5 @@
 echo -e "\n--- Ari's Ubuntu 22.04 Setup Script ---"
+cd
 
 echo -e "\nEssential apt & snap update/refresh"
 sudo apt update
@@ -6,23 +7,23 @@ sudo apt upgrade -y
 sudo snap refresh
 
 echo -e "\nInstalling all packages recommended by Ari"
-sudo apt install --no-install-recommends wine lm-sensors ffmpeg git gh asciinema adb openscad apksigner qbittorrent hwinfo powertop powerstat fancontrol traceroute tint quadrapassel gnome-disk-utility gdebi gedit steam vlc obs-studio krita inkscape telegram-desktop kamoso kdenlive imagemagick baobab tlp tlp-rdw apktool plasma-workspace-wayland cmake qt5-qmake flatpak audacity hw-probe blender virtualbox freecad libnotify-bin python3-pip default-jre default-jdk software-properties-common gimp meshlab nmap net-tools bible-kjv docker.io acpi pv neofetch zpaq torbrowser-launcher npm fprintd libpam-fprintd w3m w3m-img xautomation r-base-core d1x-rebirth d2x-rebirth curl ca-certificates libxext-dev clang gcc python3.10-venv nomacs heif-gdk-pixbuf eog heif-thumbnailer qt6-base-dev qt6-base-private-dev libqt6svg6-dev make g++ pkg-config libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libxi-dev libxrandr-dev libudev-dev libevdev-dev libsfml-dev libminiupnpc-dev libmbedtls-dev libcurl4-openssl-dev libhidapi-dev libsystemd-dev libbluetooth-dev libasound2-dev libpulse-dev libpugixml-dev libbz2-dev libzstd-dev liblzo2-dev libpng-dev libusb-1.0-0-dev gettext python3-pyqt5.qtsvg img2pdf gifsicle jstest-gtk supertuxkart php-common libapache2-mod-php php-cli composer dos2unix -y
+sudo apt install --no-install-recommends wine lm-sensors ffmpeg git gh asciinema adb openscad apksigner qbittorrent hwinfo powertop powerstat fancontrol traceroute tint quadrapassel gnome-disk-utility gdebi gedit steam vlc obs-studio krita inkscape telegram-desktop kamoso kdenlive imagemagick baobab tlp tlp-rdw apktool plasma-workspace-wayland cmake qt5-qmake flatpak audacity hw-probe blender virtualbox freecad libnotify-bin python3-pip default-jre default-jdk software-properties-common gimp meshlab nmap net-tools bible-kjv docker.io acpi pv neofetch zpaq torbrowser-launcher npm fprintd libpam-fprintd w3m w3m-img xautomation r-base-core d1x-rebirth d2x-rebirth curl ca-certificates libxext-dev clang gcc python3.10-venv nomacs heif-gdk-pixbuf heif-thumbnailer qt6-base-dev qt6-base-private-dev libqt6svg6-dev make g++ pkg-config libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libxi-dev libxrandr-dev libudev-dev libevdev-dev libsfml-dev libminiupnpc-dev libmbedtls-dev libcurl4-openssl-dev libhidapi-dev libsystemd-dev libbluetooth-dev libasound2-dev libpulse-dev libpugixml-dev libbz2-dev libzstd-dev liblzo2-dev libpng-dev libusb-1.0-0-dev gettext python3-pyqt5.qtsvg img2pdf gifsicle jstest-gtk supertuxkart php-common libapache2-mod-php php-cli composer dos2unix -y
 
-echo -e "\nRemoving KTorrent (replaced with QBitTorrent"
-sudo apt remove ktorrent -y
+echo -e "\nRemoving KTorrent & Gwenview (replaced with QBitTorrent & Nomacs"
+sudo apt remove ktorrent gwenview -y
 
 echo -e "\nInstalling AIMP"
-wget `curl -Ls -o /dev/null -w %{url_effective} "https://www.aimp.ru/?do=download.file&id=26"` && sudo dpkg -i *.deb
+wget `curl -Ls -o /dev/null -w %{url_effective} "https://www.aimp.ru/?do=download.file&id=26"` && sudo dpkg --install --force-depends aimp*.deb
 
 echo -e "\nInstalling Discord"
-wget `curl -Ls -o /dev/null -w %{url_effective} "https://discord.com/api/download?platform=linux&format=deb"` && sudo dpkg -i discord*.deb && sudo apt install --fix-broken -y && sudo dpkg -i discord*.deb
+wget `curl -Ls -o /dev/null -w %{url_effective} "https://discord.com/api/download?platform=linux&format=deb"` && sudo dpkg --install --force-depends discord*.deb
 
 echo -e "\nInstalling Minecraft"
-wget https://launcher.mojang.com/download/Minecraft.deb && sudo dpkg -i Minecraft.deb && rm *.deb
+wget https://launcher.mojang.com/download/Minecraft.deb && sudo dpkg --install --force-depends Minecraft.deb && rm *.deb
 
-echo -e "\nInstalling pdftk, zoom, openjdk, visual studio code, & android studio"
+echo -e "\nInstalling pdftk, zoom, openjdk, sublime-text & android studio"
 sudo snap install pdftk zoom-client openjdk
-sudo snap install --classic code
+sudo snap install sublime-text --classic
 sudo snap install android-studio --classic
 
 mkdir .local/bin
@@ -58,7 +59,7 @@ echo -e "\nCreating start.sh (NOT IMPLEMENTED YET"
 #echo "echo -e {} | (echo 85 | sudo -S tee /sys/class/power_supply/BAT0/charge_stop_threshold)" >> ~/.start.sh
 #echo "echo -e {} | (echo 75 | sudo -S tee /sys/class/power_supply/BAT0/charge_start_threshold)" >> ~/.start.sh
 
-
+# CONSIDER implementing a way to detect desktop environment, this script is meant for KDE (Kubuntu)
 
 # Restarting system
 reboot
