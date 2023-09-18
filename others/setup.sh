@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo -e "\n--- Ari's Ubuntu 22.04 Setup Script ---"
 cd
 
@@ -55,10 +57,36 @@ echo "alias neofetch='neofetch --ascii_distro Kubuntu'" >> ~/.bashrc
 echo "alias python='python3'" >> ~/.bashrc
 echo "alias hw-probe='sudo -E hw-probe --all --upload'" >> ~/.bashrc
 
-echo -e "\nCreating start.sh (NOT IMPLEMENTED YET"
-#touch ~/.start.sh
-#echo "echo -e {} | (echo 85 | sudo -S tee /sys/class/power_supply/BAT0/charge_stop_threshold)" >> ~/.start.sh
-#echo "echo -e {} | (echo 75 | sudo -S tee /sys/class/power_supply/BAT0/charge_start_threshold)" >> ~/.start.sh
+echo -e "\nCreating Battery Threshold script"
+sudo touch /usr/bin/batterythreshold.sh
+sudo echo "!/bin/bash" >> /usr/bin/batterythreshold.sh
+sudo echo "#echo -e password | (echo 85 | sudo -S tee /sys/class/power_supply/BAT0/charge_stop_threshold)" >> /usr/bin/batterythreshold.sh
+sudo echo "#echo -e password | (echo 75 | sudo -S tee /sys/class/power_supply/BAT0/charge_start_threshold)" >> /usr/bin/batterythreshold.sh
+sudo echo "echo 85 | tee /sys/class/power_supply/BAT0/charge_stop_threshold" >> /usr/bin/batterythreshold.sh
+sudo echo "echo 75 | tee /sys/class/power_supply/BAT0/charge_start_threshold" >> /usr/bin/batterythreshold.sh
+
+echo -e "\nCreating Battery Threshold service"
+sudo touch /etc/systemd/system/batterythreshold.service
+sudo echo "[Unit]" >> /etc/systemd/system/batterythreshold.service
+sudo echo "Description=Battery Threshold service" >> /etc/systemd/system/batterythreshold.service
+sudo echo "" >> /etc/systemd/system/batterythreshold.service
+sudo echo "[Service]" >> /etc/systemd/system/batterythreshold.service
+sudo echo "Type=simple" >> /etc/systemd/system/batterythreshold.service
+sudo echo "User=root" >> /etc/systemd/system/batterythreshold.service
+sudo echo "Group=root" >> /etc/systemd/system/batterythreshold.service
+sudo echo "TimeoutStartSec=0" >> /etc/systemd/system/batterythreshold.service
+sudo echo "Restart=on-failure" >> /etc/systemd/system/batterythreshold.service
+sudo echo "RestartSec=30s" >> /etc/systemd/system/batterythreshold.service
+sudo echo "#ExecStartPre=" >> /etc/systemd/system/batterythreshold.service
+sudo echo "ExecStart=/usr/bin/batterythreshold.sh" >> /etc/systemd/system/batterythreshold.service
+sudo echo "SyslogIdentifier=Diskutilization" >> /etc/systemd/system/batterythreshold.service
+sudo echo "#ExecStop=" >> /etc/systemd/system/batterythreshold.service
+sudo echo "" >> /etc/systemd/system/batterythreshold.service
+sudo echo "[Install]" >> /etc/systemd/system/batterythreshold.service
+sudo echo "WantedBy=multi-user.target" >> /etc/systemd/system/batterythreshold.service
+
+sudo systemctl start batterythreshold.service
+sudo systemctl enable batterythreshold.service
 
 # CONSIDER implementing a way to detect desktop environment, this script is meant for KDE (Kubuntu)
 
