@@ -26,8 +26,8 @@ wget https://launcher.mojang.com/download/Minecraft.deb && sudo dpkg --install -
 echo -e "\nInstalling Grabber"
 sudo flatpak install https://dl.flathub.org/repo/appstream/org.bionus.Grabber.flatpakref -y
 
-echo -e "\nInstalling pdftk, zoom, openjdk, gzdoom, sublime-text & android studio"
-sudo snap install pdftk zoom-client openjdk gzdoom
+echo -e "\nInstalling pdftk, zoom, openjdk, gzdoom, yt-dlg, sublime-text & android studio"
+sudo snap install pdftk zoom-client openjdk gzdoom yt-dlg
 sudo snap install sublime-text --classic
 sudo snap install android-studio --classic
 
