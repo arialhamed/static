@@ -71,6 +71,7 @@ echo "alias hw-probe='sudo -E hw-probe --all --upload'" >> ~/.bashrc
 echo "alias grabber='flatpak run org.bionus.Grabber --filename \"%search%/%date:format=yyyy-MM-dd%_%md5%.%ext%\"'" >> ~/.bashrc
 echo "alias melon='flatpak run net.kuribo64.melonDS'" >> ~/.bashrc
 echo "alias {psp,ppsspp}='flatpak run org.ppsspp.PPSSPP'" >> ~/.bashrc
+echo "alias backup='cp ~/snap/dolphin-emulator/common/.local/share/dolphin-emu/GC/MemoryCardA.USA.raw ~/Repos/arialhamed/static/others/MemoryCardA.USA.raw'" >> ~/.bashrc
 
 echo -e "\nCreating Battery Threshold script"
 sudo touch /usr/bin/batterythreshold.sh
