@@ -26,6 +26,12 @@ wget https://launcher.mojang.com/download/Minecraft.deb && sudo dpkg --install -
 echo -e "\nInstalling Grabber"
 sudo flatpak install https://dl.flathub.org/repo/appstream/org.bionus.Grabber.flatpakref -y
 
+echo -e "\Installing PPSSPP"
+sudo flatpak install flathub org.ppsspp.PPSSPP -y
+
+echo -e "\nInstalling melonDS"
+sudo flatpak install flathub net.kuribo64.melonDS -y
+
 echo -e "\nInstalling snaps"
 sudo snap install pdftk zoom-client openjdk gzdoom yt-dlg dolphin-emulator mgba
 sudo snap install sublime-text --classic
@@ -33,9 +39,6 @@ sudo snap install android-studio --classic
 
 echo -e "\nInstalling Rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-echo -e "\nInstalling melonDS"
-sudo flatpak install flathub net.kuribo64.melonDS -y
 
 mkdir .local/bin
 export PATH="$HOME/.local/bin:$PATH"
@@ -67,6 +70,7 @@ echo "alias python='python3'" >> ~/.bashrc
 echo "alias hw-probe='sudo -E hw-probe --all --upload'" >> ~/.bashrc
 echo "alias grabber='flatpak run org.bionus.Grabber --filename \"%search%/%date:format=yyyy-MM-dd%_%md5%.%ext%\"'" >> ~/.bashrc
 echo "alias melon='flatpak run net.kuribo64.melonDS'" >> ~/.bashrc
+echo "alias {psp,ppsspp}='flatpak run org.ppsspp.PPSSPP'" >> ~/.bashrc
 
 echo -e "\nCreating Battery Threshold script"
 sudo touch /usr/bin/batterythreshold.sh
